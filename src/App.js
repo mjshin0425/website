@@ -7,18 +7,25 @@ function App() {
   const onChange = (event) => {
     setKeyword(event.target.value);
   };
-  console.log("i run all the time");
-  const iRunOnlyOnce = () => {
+
+  // 빈배열, 초기에 한 번만 실행
+  useEffect(() => {
     console.log("i run only once.");
-  };
-  useEffect(() => {
-    console.log("call the api");
-  }, []);
-  useEffect(() => {
-    if (keyword !== "" && keyword.length > 5)
-      console.log("SEARCH FOR", keyword);
   }, []);
 
+  //keyword, 변화시 api 호출
+  useEffect(() => {
+    console.log("I run when 'keyword' changes.");
+  }, [keyword]);
+
+  useEffect(() => {
+    console.log("i run when 'counter' changes.");
+  }, [counter]);
+
+  //keyword, counter 둘 중 하나 변화 시 api호출
+  useEffect(() => {
+    console.log("run when 'keyword' or 'counter' changes");
+  }, [keyword, counter]);
   return (
     <div>
       <input onChange={onChange} type="text" placeholder="Search here.." />
